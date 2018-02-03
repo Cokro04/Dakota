@@ -29,8 +29,6 @@
                 <thead>
                   <tr>
                       <th>No</th>
-                      <th>Provinsi</th>
-                      <th>Kota</th>
                       <th>Kecamatan</th>
                       <th>Kode Pos</th>
                       <th>
@@ -44,20 +42,18 @@
                   <tbody>                            
                       <?php
                         $no=1;
-                        if(isset($data_batu)){
-                           foreach($data_batu as $row){
+                        if(isset($data_kecamatan)){
+                           foreach($data_kecamatan as $row){
                       ?>
                       <tr>
                        <td><?php echo $no++; ?></td>
-
-                       <td><img src="<?php echo base_url('uploads/img/'.$row->gambar_batu)?>" height="25px" width="50px"></td>
-                       <td><?php echo $row->nm_batu; ?></td>
-                       <td><?php echo $row->desk_batu; ?></td>
+                        <td><?php echo $row->nama; ?></td>
+                       <td><?php echo $row->kodepos; ?></td>
                        <td>
                           <div align="center">
-                          <a href="<?php echo base_url('batuc/manage_data_batu/'.$row->id_batu);?>" class="btn btn-default btn-xs"> <i class="fa fa-edit"></i> Ubah
+                            <a  data-toggle="modal" data-target="#modal-ubah<?php echo $row->kotakecamatanid; ?>" class="btn btn-default btn-xs"> <i class="fa fa-edit"></i> Ubah
                           </a>
-                          <a href="<?php echo base_url('batuc/proses_hapus_batu/'.$row->id_batu);?>" class="btn btn-default btn-xs"> <i class="fa fa-trash-o"></i> Hapus
+                          <a href="<?php echo base_url('batuc/proses_hapus_batu/'.$row->kotakecamatanid);?>" class="btn btn-default btn-xs"> <i class="fa fa-trash-o"></i> Hapus
                           </a>
                           </div>
                        </td>
@@ -93,23 +89,8 @@
               <input type="hidden" name="create_userid" value="<?php echo $this->session->userdata('ID') ?>"></input>
               <input type="hidden" name="update_date" value="<?php echo date('Y-m-d h:m:s'); ?>"></input>
               <input type="hidden" name="update_userid" value="<?php echo $this->session->userdata('ID') ?>"></input>
+              <input type="hidden" name="propinsikotaid" value="<?php echo $this->session->userdata('ID') ?>"></input>
               <div class="box-body ">
-            <!--     <div class="form-group">
-                  <label for="inputEmail3" class="col-sm-4 control-label">Provinsi</label>
-                  <div class="col-sm-6">
-                    <select class="form-control" id="inputEmail3" >
-                      <option value="">Pilih Provinsi</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="inputEmail3" class="col-sm-4 control-label">Provinsi</label>
-                  <div class="col-sm-6">
-                    <select class="form-control" id="inputEmail3" >
-                      <option value="">Pilih Kota</option>
-                    </select>
-                  </div>
-                </div> -->
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-4 control-label">Nama Kecamatan</label>
                   <div class="col-sm-6">
@@ -119,7 +100,7 @@
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-4 control-label">Kode Pos</label>
                   <div class="col-sm-6">
-                    <input type="text" class="form-control" id="inputEmail3" placeholder="Kode Pos" name="propinsikotaid">
+                    <input type="text" class="form-control" id="inputEmail3" placeholder="Kode Pos" name="kodepos">
                   </div>
                 </div>
               </div>

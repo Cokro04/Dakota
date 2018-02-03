@@ -21,6 +21,7 @@ class mitrac extends CI_Controller {
 
             'active_mitra'=>'active',
             'data_mitra'=>$this->adminm->getAllData('tbl_mitra'),
+            'data_prov'=>$this->adminm->getAllData('tbl_propinsi'),
             
         );
         $this->load->view('elements/header', $data);

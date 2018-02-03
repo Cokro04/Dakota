@@ -31,6 +31,13 @@ class adminm extends CI_Model{
         $this->db->insert($table,$data);
     }
 
+    public function viewByProvinsi($propinsiid){
+    $this->db->where('propinsiid', $propinsiid);
+    $result = $this->db->get('tbl_propinsi_kota')->result(); // Tampilkan semua data kota berdasarkan id provinsi
+    
+    return $result; 
+  }
+
 
 // ===========================================          Script         ======================================= //
 // ===========================================                         ======================================= //

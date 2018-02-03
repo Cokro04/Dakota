@@ -11,7 +11,7 @@ class pelangganc extends CI_Controller {
         };
 
     }
-    
+     
 	public function data_pelanggan()
 	{
 
@@ -21,10 +21,11 @@ class pelangganc extends CI_Controller {
 
             'active_pelanggan'=>'active',
             'data_pelanggan'=>$this->adminm->getAllData('tbl_customer'),
+            'data_prov'=>$this->adminm->getAllData('tbl_propinsi'),
             
         );
         $this->load->view('elements/header', $data);
-        $this->load->view('pages/pelanggan/data_pelanggan');
+        $this->load->view('pages/pelanggan/data_pelanggan', $data);
         $this->load->view('elements/footer');
 	}
 
@@ -85,6 +86,24 @@ class pelangganc extends CI_Controller {
 
         redirect("pelangganc/data_pelanggan");
     }
+
+     public function listKota(){
+    // Ambil data ID Provinsi yang dikirim via ajax post
+    $propinsiid = $this->input->post('propinsiid');
+    
+    $kota = $this->adminm->viewByProvinsi($propinsiid);
+    
+    // Buat variabel untuk menampung tag-tag option nya
+    // Set defaultnya dengan tag option Pilih
+    $lists = "<option value=''>Pilih</option>";
+    
+    foreach($kota as $data){
+      $lists .= "<option value='".$data->propinsikotaid."'>".$data->nama."</option>"; // Tambahkan tag option ke variabel $lists
+    }
+    
+    $callback = array('list_kota'=>$lists); // Masukan variabel lists tadi ke dalam array $callback dengan index array : list_kota
+    echo json_encode($callback); // konversi varibael $callback menjadi JSON
+  }
 
 
 }

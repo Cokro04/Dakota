@@ -21,7 +21,7 @@ class kecamatanc extends CI_Controller {
 
             'active_wilayah'=>'active',
             'active_kec'=>'active',
-            'data_kecamatan'=>$this->adminm->get_all_data_kecamatan(),
+            'data_kecamatan'=>$this->adminm->getAllData('tbl_kota_kecamatan'),
             
             
         );
@@ -37,9 +37,10 @@ class kecamatanc extends CI_Controller {
             'update_date'=>$this->input->post('update_date'),
             'update_userid'=>$this->input->post('update_userid'),
             'nama'=>$this->input->post('nama'),
+            'kodepos'=>$this->input->post('kodepos'),
             'propinsikotaid'=>$this->input->post('propinsikotaid'),
         );
-        $this->adminm->insertData('tbl_kecamatan_kota',$data);
+        $this->adminm->insertData('tbl_kota_kecamatan',$data);
         redirect("kecamatanc/data_kecamatan");
     }
 
@@ -49,15 +50,16 @@ class kecamatanc extends CI_Controller {
             'update_date'=>$this->input->post('update_date'),
             'update_userid'=>$this->input->post('update_userid'),
             'nama'=>$this->input->post('nama'),
+            'kodepos'=>$this->input->post('kodepos'),
             'propinsikotaid'=>$this->input->post('propinsikotaid'),
         );
-        $this->adminm->updateData('tbl_kecamatan_kota',$data,$id);
+        $this->adminm->updateData('tbl_kota_kecamatan',$data,$id);
         redirect("kecamatanc/data_kecamatan");
     }
 
     function proses_hapus_kecamatan(){
         $id['kotakecamatanid'] = $this->uri->segment(3);
-        $this->adminm->deleteData('tbl_kecamatan_kota',$id);
+        $this->adminm->deleteData('tbl_kota_kecamatan',$id);
 
         redirect("kecamatanc/data_kecamatan");
     }
